@@ -16,7 +16,7 @@ Add a new server and select **VLESS**:
 - **Flow**: `xtls-rprx-vision`
 - **Network**: `tcp`
 - **Security**: `reality`
-- **PBK**: `/HTfHOmXsg85446iOTeaRhW4vFMwC0a6h7842RsyAEA=`
+- **PBK**: `g72ehB9XFVH3vbJ4UzYUvjNF-tvPyS0RGftHiDmwBi4`
 - **SNI**: `www.microsoft.com`
 - **SID**: `a7814ad56ccfb712`
 
@@ -52,7 +52,7 @@ Upload this to your `XRAY_CONFIG_URL`:
             "www.microsoft.com",
             "www.bing.com"
           ],
-          "privateKey": "ODW+NyqxG7WbXn/YZpqux0Tu8NwrjGRgQY8jI1+cP3I=",
+          "privateKey": "cJmHDfMpMrNQQEHJfmA7U-WlVkwoMCBmKIAxOsjSxkY",
           "shortIds": [
             "a7814ad56ccfb712"
           ]
