@@ -1,11 +1,10 @@
-# Base stage to download config and prepare assets
-FROM ghcr.io/xtls/xray-core:latest AS builder
+# Base stage to download config
+FROM alpine:latest AS builder
 
 # Argument for the config URL (passed from GitHub Actions)
 ARG XRAY_CONFIG_URL
 
 # Install wget to download the config
-USER root
 RUN apk add --no-cache wget
 
 # Download the config file
