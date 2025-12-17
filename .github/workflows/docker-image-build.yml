@@ -35,6 +35,6 @@ jobs:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: qinbatista/hysteria2-server:latest
+          tags: qinbatista/xray-reality:latest
           build-args: |
-             HYSTERIA_CONFIG_URL=${{ vars.HYSTERIA_CONFIG_URL }}
+             XRAY_CONFIG_URL=${{ vars.XRAY_CONFIG_URL }}

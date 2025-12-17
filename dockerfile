@@ -1,24 +1,24 @@
-FROM alpine:3 AS builder
+# Base stage to download config and prepare assets
+FROM ghcr.io/XTLS/Xray-core:latest AS builder
 
-ARG HYSTERIA_CONFIG_URL
+# Argument for the config URL (passed from GitHub Actions)
+ARG XRAY_CONFIG_URL
 
+# Install wget to download the config
+USER root
+RUN apk add --no-cache wget
+
+# Download the config file
 WORKDIR /tmp
-# Install wget and openssl
-RUN apk add --no-cache wget openssl && \
-    wget -O config.yaml "${HYSTERIA_CONFIG_URL}" && \
-    # Generate self-signed certificate (valid for 10 years, CN=www.bing.com)
-    openssl req -x509 -newkey rsa:4096 -nodes -sha256 \
-    -keyout server.key -out server.crt -days 3650 \
-    -subj "/CN=www.bing.com"
+RUN wget -O config.json "${XRAY_CONFIG_URL}"
 
 # Final stage
-FROM tobyxdd/hysteria:latest
+FROM ghcr.io/XTLS/Xray-core:latest
 
-# Copy config and certificates
-COPY --from=builder /tmp/config.yaml /etc/hysteria/config.yaml
-COPY --from=builder /tmp/server.crt /etc/hysteria/server.crt
-COPY --from=builder /tmp/server.key /etc/hysteria/server.key
+# Copy the baked-in config
+COPY --from=builder /tmp/config.json /etc/xray/config.json
 
-EXPOSE 7003/udp
+ENV XRAY_LOCATION_ASSET=/usr/share/xray/
+EXPOSE 7004
 
-CMD ["server", "-c", "/etc/hysteria/config.yaml"]
+CMD ["run", "-c", "/etc/xray/config.json"]
