@@ -1,5 +1,5 @@
 # Base stage to download config and prepare assets
-FROM ghcr.io/XTLS/Xray-core:latest AS builder
+FROM ghcr.io/xtls/xray-core:latest AS builder
 
 # Argument for the config URL (passed from GitHub Actions)
 ARG XRAY_CONFIG_URL
@@ -13,7 +13,7 @@ WORKDIR /tmp
 RUN wget -O config.json "${XRAY_CONFIG_URL}"
 
 # Final stage
-FROM ghcr.io/XTLS/Xray-core:latest
+FROM ghcr.io/xtls/xray-core:latest
 
 # Copy the baked-in config
 COPY --from=builder /tmp/config.json /etc/xray/config.json
