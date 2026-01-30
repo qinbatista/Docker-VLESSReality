@@ -18,6 +18,6 @@ FROM ghcr.io/xtls/xray-core:latest
 COPY --from=builder /tmp/config.json /etc/xray/config.json
 
 ENV XRAY_LOCATION_ASSET=/usr/share/xray/
-EXPOSE 7004
+EXPOSE 443
 
 CMD ["run", "-c", "/etc/xray/config.json"]
